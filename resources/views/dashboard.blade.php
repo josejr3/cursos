@@ -14,4 +14,5 @@
             </div>
         </div>
     </div>
+    <livewire:gemini-chat />
 </x-app-layout>
