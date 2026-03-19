@@ -1,4 +1,5 @@
-<div> <div
+<div>
+    <div
         x-data="{
             open: false,
             fullscreen: false,
@@ -63,7 +64,7 @@
                     </button>
                     <button type="button" @click="fullscreen = !fullscreen" class="p-1.5 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-all focus:outline-none">
                         <svg x-show="!fullscreen" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l-5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
                         </svg>
                         <svg x-show="fullscreen" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 14h6m0 0v6m0-6l-7 7m17-11h-6m0 0V4m0 6l7-7M4 10h6m0 0V4m0 6l-7-7m17 10h-6m0 0v6m0-6l7 7"></path>
@@ -82,8 +83,8 @@
                 <div class="flex flex-col space-y-5" wire:key="messages-container">
                     @foreach($messages as $index => $message)
                         <div wire:key="msg-{{ $index }}" class="flex {{ $message['role'] === 'user' ? 'justify-end' : 'justify-start' }}">
-                            <div class="max-w-[80%] flex flex-col {{ $message['role'] === 'user' ? 'items-end' : 'items-start' }}">
-                                <div class="px-4 py-2.5 text-[14px] leading-relaxed break-words {{ $message['role'] === 'user' ? 'bg-gradient-to-br from-[#ff00a0] to-[#c2007a] text-white rounded-2xl rounded-tr-sm shadow-[0_8px_15px_rgba(255,0,160,0.2)]' : 'bg-white/5 border border-white/10 text-gray-200 rounded-2xl rounded-tl-sm shadow-sm' }}">
+                            <div class="max-w-[85%] flex flex-col {{ $message['role'] === 'user' ? 'items-end' : 'items-start' }}">
+                                <div class="px-6 py-4 text-[14px] leading-relaxed break-words break-all {{ $message['role'] === 'user' ? 'bg-[#d60086] text-white rounded-2xl' : 'bg-[#18181b] border border-[#27272a] border-l-[3px] border-l-[#00e5ff] text-gray-200 rounded-2xl' }}">
                                     {{ $message['content'] }}
                                 </div>
                                 <span class="text-[10px] text-gray-500 mt-1.5 px-1">{{ now()->format('H:i') }}</span>
