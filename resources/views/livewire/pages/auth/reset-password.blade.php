@@ -25,7 +25,7 @@ new #[Layout('layouts.guest')] class extends Component
     {
         $this->token = $token;
 
-        $this->email = request()->string('email');
+        $this->email = request()->string('email')->toString();
     }
 
     /**
@@ -69,37 +69,110 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
-    <form wire:submit="resetPassword">
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<div class="min-h-screen bg-background text-on-background font-body relative overflow-x-hidden flex flex-col">
+    <div class="glow-orb absolute -top-24 -left-24 w-96 h-96 rounded-full bg-primary-dim opacity-10"></div>
+    <div class="glow-orb absolute top-1/2 -right-48 w-[500px] h-[500px] rounded-full bg-secondary-container opacity-5"></div>
+    <div class="glow-orb absolute -bottom-32 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary-container opacity-10"></div>
+
+    <main class="flex-grow flex items-center justify-center px-4 py-12 z-10">
+        <div class="w-full max-w-md">
+            <div class="glass-panel bg-surface-container-high/60 rounded-xl p-8 md:p-10 border border-outline-variant/10 shadow-2xl">
+                <div class="space-y-2">
+                    <div class="flex justify-center mb-6">
+                        <div class="font-headline text-3xl font-black tracking-tighter text-on-surface">
+                            TALENT<span class="text-secondary">CAMP</span>
+                        </div>
+                    </div>
+                    <h1 class="font-headline text-3xl font-extrabold tracking-tight text-on-surface text-center">
+                        Nueva contrasena
+                    </h1>
+                    <p class="text-on-surface-variant text-center font-medium">
+                        Introduce tu nueva contrasena para recuperar el acceso.
+                    </p>
+                </div>
+
+                <x-auth-session-status class="mb-4 mt-6 text-secondary-fixed-dim" :status="session('status')" />
+
+                <form wire:submit="resetPassword" class="space-y-6 mt-6">
+                    <div class="space-y-2">
+                        <label for="email" class="block font-label text-sm font-semibold tracking-wider text-on-surface-variant uppercase ml-1">
+                            Email
+                        </label>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <span class="material-symbols-outlined text-on-surface-variant group-focus-within:text-secondary transition-colors">mail</span>
+                            </div>
+                            <input
+                                wire:model="email"
+                                id="email"
+                                type="email"
+                                name="email"
+                                required
+                                autofocus
+                                autocomplete="username"
+                                placeholder="ejemplo@correo.com"
+                                class="w-full bg-surface-container-highest border-transparent rounded-xl py-4 pl-12 pr-4 text-on-surface focus:ring-1 focus:ring-secondary/40 focus:border-secondary/40 transition-all placeholder:text-outline"
+                            />
+                        </div>
+                        <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-400" />
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="password" class="block font-label text-sm font-semibold tracking-wider text-on-surface-variant uppercase ml-1">
+                            Nueva contrasena
+                        </label>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <span class="material-symbols-outlined text-on-surface-variant group-focus-within:text-secondary transition-colors">lock</span>
+                            </div>
+                            <input
+                                wire:model.defer="password"
+                                id="password"
+                                type="password"
+                                name="password"
+                                required
+                                autocomplete="new-password"
+                                placeholder="********"
+                                class="w-full bg-surface-container-highest border-transparent rounded-xl py-4 pl-12 pr-4 text-on-surface focus:ring-1 focus:ring-secondary/40 focus:border-secondary/40 transition-all placeholder:text-outline"
+                            />
+                        </div>
+                        <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-400" />
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="password_confirmation" class="block font-label text-sm font-semibold tracking-wider text-on-surface-variant uppercase ml-1">
+                            Confirmar contrasena
+                        </label>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <span class="material-symbols-outlined text-on-surface-variant group-focus-within:text-secondary transition-colors">password</span>
+                            </div>
+                            <input
+                                wire:model.defer="password_confirmation"
+                                id="password_confirmation"
+                                type="password"
+                                name="password_confirmation"
+                                required
+                                autocomplete="new-password"
+                                placeholder="********"
+                                class="w-full bg-surface-container-highest border-transparent rounded-xl py-4 pl-12 pr-4 text-on-surface focus:ring-1 focus:ring-secondary/40 focus:border-secondary/40 transition-all placeholder:text-outline"
+                            />
+                        </div>
+                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 text-red-400" />
+                    </div>
+
+                    <button type="submit" class="w-full bg-primary-dim hover:bg-primary py-5 rounded-full text-on-primary font-label font-bold tracking-[0.1em] text-sm transition-all transform active:scale-[0.98] shadow-lg shadow-primary-dim/20 uppercase">
+                        Restablecer contrasena
+                    </button>
+                </form>
+
+                <div class="mt-10 text-center">
+                    <a href="{{ route('login') }}" wire:navigate class="text-secondary-fixed-dim font-bold ml-1 hover:underline underline-offset-4 decoration-2 inline-flex items-center gap-2">
+                        <span class="material-symbols-outlined text-lg">keyboard_backspace</span>
+                        Volver al inicio de sesion
+                    </a>
+                </div>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                          type="password"
-                          name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
+    </main>
 </div>
