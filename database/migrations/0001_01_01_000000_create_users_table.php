@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('apellidos');
             $table->text('descripcion')->nullable();
             $table->string('password');
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -28,6 +28,13 @@ class DatabaseSeeder extends Seeder
                 'remember_token' => Str::random(60),
             ]
         );
+        User::factory()->create([
+        'nombre' => 'Admin',
+        'apellidos' => 'Sistema',
+        'email' => 'admin@ejemplo.com',
+        'password' => Hash::make('test'),
+        'is_admin' => true,
+        ]);
 
         Course::updateOrCreate(
             ['titulo' => 'Fundamentos de Laravel 12'],

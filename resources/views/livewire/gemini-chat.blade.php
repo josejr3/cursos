@@ -33,7 +33,7 @@
             type="button"
             x-show="!open"
             @click="open = true"
-            class="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-[#00e5ff] to-[#00bfff] text-black rounded-full shadow-[0_0_20px_rgba(0,229,255,0.4)] flex items-center justify-center hover:scale-105 focus:outline-none transition-transform duration-200"
+            class="fixed bottom-6 right-6 w-14 h-14 bg-[#00FF00] text-black rounded-full  flex items-center justify-center hover:scale-105 focus:outline-none transition-transform duration-200"
         >
             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
@@ -52,7 +52,7 @@
             >
                 <div class="flex items-center space-x-2">
                     <span class="text-white font-semibold text-[15px] tracking-wide">
-                        LOGO
+                        TALENT<span class="text-[#00FF00]">CAMP</span>
                     </span>
                 </div>
 
@@ -66,13 +66,13 @@
                         <svg x-show="!fullscreen" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l-5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
                         </svg>
-                        <svg x-show="fullscreen" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg x-show="fullscreen" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 14h6m0 0v6m0-6l-7 7m17-11h-6m0 0V4m0 6l7-7M4 10h6m0 0V4m0 6l-7-7m17 10h-6m0 0v6m0-6l7 7"></path>
                         </svg>
                     </button>
-                    <button type="button" @click="open = false; fullscreen = false" class="p-1.5 text-gray-400 hover:text-[#ff00a0] hover:bg-[#ff00a0]/10 rounded-lg transition-all focus:outline-none">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <button type="button" @click="open = false; fullscreen = false" class="p-1.5 text-gray-400 hover:text-[#00FF00] hover:bg-[#00FF00]/10 rounded-lg transition-all focus:outline-none">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
@@ -84,7 +84,7 @@
                     @foreach($messages as $index => $message)
                         <div wire:key="msg-{{ $index }}" class="flex {{ $message['role'] === 'user' ? 'justify-end' : 'justify-start' }}">
                             <div class="max-w-[85%] flex flex-col {{ $message['role'] === 'user' ? 'items-end' : 'items-start' }}">
-                                <div class="px-6 py-4 text-[14px] leading-relaxed break-words break-all {{ $message['role'] === 'user' ? 'bg-[#d60086] text-white rounded-2xl' : 'bg-[#18181b] border border-[#27272a] border-l-[3px] border-l-[#00e5ff] text-gray-200 rounded-2xl' }}">
+                                <div class="px-6 py-4 text-[14px] leading-relaxed break-words break-all {{ $message['role'] === 'user' ? 'bg-[#00FF00] text-black font-medium rounded-2xl' : 'bg-[#18181b] border border-[#27272a] border-l-[3px] border-l-[#00e5ff] text-gray-200 rounded-2xl' }}">
                                     {{ $message['content'] }}
                                 </div>
                                 <span class="text-[10px] text-gray-500 mt-1.5 px-1">{{ now()->format('H:i') }}</span>
@@ -99,16 +99,15 @@
                             <div class="px-5 py-3.5 bg-white/5 border border-white/10 rounded-2xl rounded-tl-sm flex items-center space-x-1.5 shadow-sm">
                                 <div class="w-1.5 h-1.5 bg-[#00e5ff] rounded-full animate-bounce"></div>
                                 <div class="w-1.5 h-1.5 bg-[#00e5ff] rounded-full animate-bounce" style="animation-delay: 0.15s"></div>
-                                <div class="w-1.5 h-1.5 bg-[#ff00a0] rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+                                <div class="w-1.5 h-1.5 bg-[#00FF00] rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="bg-[#000000]/20 p-4 border-t border-white/5 z-10 flex-shrink-0">
-                <div class="flex items-center bg-[#09090b]/80 border border-white/10 rounded-full p-1.5 focus-within:border-[#00e5ff]/50 focus-within:ring-1 focus-within:ring-[#00e5ff]/50 transition-all shadow-inner">
+                <div class="flex items-center bg-[#09090b]/80 border border-white/10 rounded-full p-1.5 focus-within:border-[#00FF00]/50 focus-within:ring-1 focus-within:ring-[#00FF00]/50 transition-all shadow-inner">
                     <input
                         type="text"
                         wire:model="newMessage"
@@ -121,7 +120,7 @@
                         type="button"
                         wire:click="sendMessage"
                         {{ $isWaiting ? 'disabled' : '' }}
-                        class="w-9 h-9 bg-gradient-to-r from-[#ff00a0] to-[#d60086] rounded-full flex items-center justify-center text-white hover:brightness-110 transition-all shadow-[0_0_12px_rgba(255,0,160,0.4)] flex-shrink-0 focus:outline-none disabled:opacity-50"
+                        class="w-9 h-9 bg-gradient-to-r from-[#00FF00] to-[#00d400] rounded-full flex items-center justify-center text-black hover:brightness-110 transition-all shadow-[0_0_12px_rgba(0,255,0,0.4)] flex-shrink-0 focus:outline-none disabled:opacity-50"
                     >
                         <svg class="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
