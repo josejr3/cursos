@@ -12,9 +12,19 @@
                             Empieza por una clase y construye progreso constante.
                         </p>
                     </div>
-                    <span class="inline-flex items-center rounded-full bg-[#00FF00]/10 text-[#00FF00] border border-[#00FF00]/20 px-4 py-2 text-sm font-semibold">
-                        {{ $courses->count() }} disponibles
-                    </span>
+
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                        <a
+                            href="{{ route('contestants.index') }}"
+                            class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-white hover:border-[#00FF00]/40 hover:text-[#00FF00] transition-all"
+                        >
+                            Ver concursantes
+                        </a>
+
+                        <span class="inline-flex items-center rounded-full bg-[#00FF00]/10 text-[#00FF00] border border-[#00FF00]/20 px-4 py-2 text-sm font-semibold">
+                            {{ $courses->count() }} disponibles
+                        </span>
+                    </div>
                 </div>
             </div>
 

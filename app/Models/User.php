@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Notifications\ResetPasswordNotification;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmailContract
 {
     use HasFactory, Notifiable;
 
@@ -39,11 +39,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
         'nombre',
         'apellidos',
         'email',
         'descripcion',
         'password',
+        'email_verified_at',
+        'is_admin',
     ];
 
     /**
@@ -64,15 +67,46 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
 
     /**
-     * Send the password reset notification.
+     * Keep compatibility with Laravel auth scaffolding that expects a `name` field.
      */
-    public function sendPasswordResetNotification($token): void
+    protected function name(): Attribute
     {
-        $this->notify(new ResetPasswordNotification($token));
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes): string => trim(($attributes['nombre'] ?? '').' '.($attributes['apellidos'] ?? '')),
+            set: function (?string $value): array {
+                $value = trim((string) $value);
+
+                if ($value === '') {
+                    return [
+                        'nombre' => '',
+                        'apellidos' => '',
+                    ];
+                }
+
+                $parts = preg_split('/\s+/', $value, 2);
+
+                return [
+                    'nombre' => $parts[0] ?? '',
+                    'apellidos' => $parts[1] ?? '',
+                ];
+            },
+        );
     }
+
+    /**
+     * Expose the email primary key through the default `id` attribute expected by auth scaffolding.
+     */
+    protected function id(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes): ?string => $attributes['email'] ?? null,
+        );
+    }
+
 }

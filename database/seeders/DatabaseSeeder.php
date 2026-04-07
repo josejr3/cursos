@@ -24,17 +24,22 @@ class DatabaseSeeder extends Seeder
                 'nombre' => 'Test',
                 'apellidos' => 'User',
                 'descripcion' => 'Usuario de prueba',
+                'email_verified_at' => now(),
                 'password' => Hash::make('password123'),
                 'remember_token' => Str::random(60),
             ]
         );
-        User::factory()->create([
-        'nombre' => 'Admin',
-        'apellidos' => 'Sistema',
-        'email' => 'admin@ejemplo.com',
-        'password' => Hash::make('test'),
-        'is_admin' => true,
-        ]);
+
+        User::updateOrCreate(
+            ['email' => 'admin@ejemplo.com'],
+            [
+                'nombre' => 'Admin',
+                'apellidos' => 'Sistema',
+                'email_verified_at' => now(),
+                'password' => Hash::make('test'),
+                'is_admin' => true,
+            ]
+        );
 
         Course::updateOrCreate(
             ['titulo' => 'Fundamentos de Laravel 12'],
