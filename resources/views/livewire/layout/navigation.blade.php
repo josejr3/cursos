@@ -16,68 +16,96 @@ new class extends Component
     }
 }; ?>
 
-<nav x-data="{ open: false }" class="bg-surface-container border-b border-outline-variant/40 text-on-surface">
-    <!-- Primary Navigation Menu -->
+<nav x-data="{ open: false }" class="sticky top-0 z-40 border-b border-white/10 bg-black/40 backdrop-blur-xl text-on-surface">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" wire:navigate>
-                        <x-application-logo class="block h-9 w-auto fill-current text-on-surface" />
+        <div class="flex h-16 items-center justify-between gap-4">
+            <div class="flex items-center gap-3 sm:gap-6">
+                <a href="{{ route('dashboard') }}" wire:navigate class="group flex items-center gap-3">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 shadow-lg shadow-black/20 transition group-hover:border-[#00FF00]/30 group-hover:bg-[#00FF00]/10">
+                        <x-application-logo class="block h-7 w-auto fill-current text-white" />
+                    </span>
+
+                    <div class="hidden md:block">
+                        <p class="font-headline text-sm font-bold tracking-wide text-white">TalentCamp</p>
+                        <p class="text-xs text-gray-400">Panel principal</p>
+                    </div>
+                </a>
+
+                <div class="hidden sm:flex items-center gap-2 rounded-full border border-white/10 bg-white/5 p-1">
+                    <a
+                        href="{{ route('dashboard') }}"
+                        wire:navigate
+                        class="rounded-full px-4 py-2 text-sm font-semibold transition {{ request()->routeIs('dashboard') ? 'bg-[#00FF00] text-black shadow-[0_0_20px_rgba(0,255,0,0.18)]' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}"
+                    >
+                        Cursos
                     </a>
-                </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Cursos') }}
-                    </x-nav-link>
+                    <a
+                        href="{{ route('contestants.index') }}"
+                        wire:navigate
+                        class="rounded-full px-4 py-2 text-sm font-semibold transition {{ request()->routeIs('contestants.index') ? 'bg-[#00FF00] text-black shadow-[0_0_20px_rgba(0,255,0,0.18)]' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}"
+                    >
+                        Concursantes
+                    </a>
 
-                    <x-nav-link :href="route('contestants.index')" :active="request()->routeIs('contestants.index')" wire:navigate>
-                        {{ __('Concursantes') }}
-                    </x-nav-link>
+                    @if (auth()->user()->is_admin)
+                        <a
+                            href="{{ route('admin.users') }}"
+                            wire:navigate
+                            class="rounded-full px-4 py-2 text-sm font-semibold transition {{ request()->routeIs('admin.users') ? 'bg-[#00FF00] text-black shadow-[0_0_20px_rgba(0,255,0,0.18)]' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}"
+                        >
+                            Admin
+                        </a>
+                    @endif
                 </div>
-               @if(auth()->user()->is_admin)
-                <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')" wire:navigate>
-                {{ __('Admin: Usuarios') }}
-                </x-nav-link>
-                @endif
             </div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-on-surface-variant bg-surface-container hover:text-on-surface focus:outline-none transition ease-in-out duration-150">
-                            <div x-data="{{ json_encode(['name' => auth()->user()->nombre]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+            <div class="hidden sm:flex items-center gap-3">
+                <span class="inline-flex items-center rounded-full border border-[#00FF00]/20 bg-[#00FF00]/10 px-3 py-1 text-xs font-semibold text-[#00FF00]">
+                    En línea
+                </span>
 
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
+                <x-dropdown align="right" width="56">
+                    <x-slot name="trigger">
+                        <button class="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-2 py-2 text-sm font-medium text-white hover:border-[#00FF00]/30 hover:bg-white/10 focus:outline-none transition duration-150">
+                            <img
+                                src="{{ auth()->user()->profile_photo_url }}"
+                                alt="Foto de {{ auth()->user()->nombre }}"
+                                class="h-9 w-9 rounded-full object-cover border border-[#00FF00]/20"
+                            >
+
+                            <div class="hidden md:block text-left leading-tight">
+                                <div class="text-sm font-semibold" x-data="{{ json_encode(['name' => auth()->user()->nombre]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+                                <div class="text-xs text-gray-400">Mi cuenta</div>
                             </div>
+
+                            <svg class="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 011.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                            </svg>
                         </button>
                     </x-slot>
 
                     <x-slot name="content">
+                        <div class="px-4 py-3 border-b border-white/10">
+                            <p class="text-sm font-semibold text-gray-800">{{ auth()->user()->nombre }}</p>
+                            <p class="text-xs text-gray-500">{{ auth()->user()->email }}</p>
+                        </div>
+
                         <x-dropdown-link :href="route('profile')" wire:navigate>
-                            {{ __('Profile') }}
+                            Perfil
                         </x-dropdown-link>
 
-                        <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
                             <x-dropdown-link>
-                                {{ __('Log Out') }}
+                                Cerrar sesión
                             </x-dropdown-link>
                         </button>
                     </x-slot>
                 </x-dropdown>
             </div>
 
-            <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high focus:outline-none focus:bg-surface-container-high focus:text-on-surface transition duration-150 ease-in-out">
+                <button @click="open = ! open" class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 p-2 text-white hover:border-[#00FF00]/30 hover:bg-white/10 focus:outline-none transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -87,35 +115,58 @@ new class extends Component
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Cursos') }}
-            </x-responsive-nav-link>
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden border-t border-white/10 bg-black/60 backdrop-blur-xl">
+        <div class="px-4 py-4 space-y-4">
+            <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3">
+                <img
+                    src="{{ auth()->user()->profile_photo_url }}"
+                    alt="Foto de {{ auth()->user()->nombre }}"
+                    class="h-11 w-11 rounded-full object-cover border border-[#00FF00]/20"
+                >
 
-            <x-responsive-nav-link :href="route('contestants.index')" :active="request()->routeIs('contestants.index')" wire:navigate>
-                {{ __('Concursantes') }}
-            </x-responsive-nav-link>
-        </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-outline-variant/40">
-            <div class="px-4">
-                <div class="font-medium text-base text-on-surface" x-data="{{ json_encode(['name' => auth()->user()->nombre]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
-                <div class="font-medium text-sm text-on-surface-variant">{{ auth()->user()->email }}</div>
+                <div>
+                    <div class="font-semibold text-white" x-data="{{ json_encode(['name' => auth()->user()->nombre]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+                    <div class="text-sm text-gray-400">{{ auth()->user()->email }}</div>
+                </div>
             </div>
 
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile')" wire:navigate>
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+            <div class="space-y-2">
+                <a
+                    href="{{ route('dashboard') }}"
+                    wire:navigate
+                    class="block rounded-xl px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('dashboard') ? 'bg-[#00FF00] text-black' : 'bg-white/5 text-gray-200 hover:bg-white/10' }}"
+                >
+                    Cursos
+                </a>
 
-                <!-- Authentication -->
-                <button wire:click="logout" class="w-full text-start">
-                    <x-responsive-nav-link>
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
+                <a
+                    href="{{ route('contestants.index') }}"
+                    wire:navigate
+                    class="block rounded-xl px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('contestants.index') ? 'bg-[#00FF00] text-black' : 'bg-white/5 text-gray-200 hover:bg-white/10' }}"
+                >
+                    Concursantes
+                </a>
+
+                @if (auth()->user()->is_admin)
+                    <a
+                        href="{{ route('admin.users') }}"
+                        wire:navigate
+                        class="block rounded-xl px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('admin.users') ? 'bg-[#00FF00] text-black' : 'bg-white/5 text-gray-200 hover:bg-white/10' }}"
+                    >
+                        Admin
+                    </a>
+                @endif
+
+                <a
+                    href="{{ route('profile') }}"
+                    wire:navigate
+                    class="block rounded-xl bg-white/5 px-4 py-3 text-sm font-semibold text-gray-200 hover:bg-white/10 transition"
+                >
+                    Perfil
+                </a>
+
+                <button wire:click="logout" class="block w-full rounded-xl bg-red-500/10 px-4 py-3 text-left text-sm font-semibold text-red-200 hover:bg-red-500/20 transition">
+                    Cerrar sesión
                 </button>
             </div>
         </div>

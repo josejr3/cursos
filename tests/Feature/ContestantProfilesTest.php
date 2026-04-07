@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ContestantProfilesTest extends TestCase
@@ -12,6 +13,9 @@ class ContestantProfilesTest extends TestCase
 
     public function test_authenticated_user_can_view_other_contestants_with_gmail_links(): void
     {
+        Storage::fake('public');
+        Storage::disk('public')->put('profile-photos/luis.png', 'fake-image');
+
         $currentUser = User::factory()->create([
             'nombre' => 'Raul',
             'apellidos' => 'Lopez',
@@ -30,6 +34,7 @@ class ContestantProfilesTest extends TestCase
             'apellidos' => 'Gomez',
             'email' => 'luis@example.com',
             'descripcion' => 'Backend y APIs.',
+            'profile_photo_path' => 'profile-photos/luis.png',
         ]);
 
         User::factory()->create([
@@ -49,6 +54,8 @@ class ContestantProfilesTest extends TestCase
             ->assertSee('luis@example.com')
             ->assertDontSee('Raul Lopez')
             ->assertDontSee('admin@example.com')
+            ->assertSee('/images/default-avatar.svg', false)
+            ->assertSee('/storage/profile-photos/luis.png', false)
             ->assertSee('https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ana%40example.com', false)
             ->assertSee('https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=luis%40example.com', false);
     }

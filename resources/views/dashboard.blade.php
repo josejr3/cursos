@@ -38,29 +38,46 @@
             @else
                 <div class="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
                     @foreach ($courses as $course)
-                        <article class="glass-panel rounded-xl p-5 border border-white/10 shadow-xl hover:border-[#00FF00]/30 transition-all duration-200">
-                            <div class="flex items-start justify-between gap-3">
-                                <h2 class="font-headline text-xl font-bold text-white leading-tight">
-                                    {{ $course->titulo }}
-                                </h2>
+                        <article class="glass-panel overflow-hidden rounded-xl border border-white/10 shadow-xl hover:border-[#00FF00]/30 transition-all duration-200">
+                            <div class="relative">
+                                <img
+                                    src="{{ $course->thumbnail_url }}"
+                                    alt="Miniatura de {{ $course->titulo }}"
+                                    class="h-44 w-full object-cover"
+                                    loading="lazy"
+                                >
+
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                                <div class="absolute bottom-3 left-3 inline-flex items-center rounded-full bg-black/70 px-3 py-1 text-xs font-semibold text-[#00FF00] border border-[#00FF00]/20">
+                                    ▶ Video disponible
+                                </div>
                             </div>
 
-                            <p class="mt-3 text-gray-400 text-sm leading-6">
-                                {{ $course->descripcion }}
-                            </p>
+                            <div class="p-5">
+                                <div class="flex items-start justify-between gap-3">
+                                    <h2 class="font-headline text-xl font-bold text-white leading-tight">
+                                        {{ $course->titulo }}
+                                    </h2>
+                                </div>
 
-                            <div class="mt-5 flex items-center justify-between gap-3">
-                                <span class="text-xs text-gray-500">
-                                    {{ $course->updated_at->diffForHumans() }}
-                                </span>
-                                <a
-                                    href="{{ $course->url_video }}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center rounded-full bg-[#00FF00] hover:bg-[#00e600] px-5 py-2 text-sm font-bold text-black transition-all shadow-[0_0_15px_rgba(0,255,0,0.2)]"
-                                >
-                                    Ver curso
-                                </a>
+                                <p class="mt-3 text-gray-400 text-sm leading-6">
+                                    {{ $course->descripcion }}
+                                </p>
+
+                                <div class="mt-5 flex items-center justify-between gap-3">
+                                    <span class="text-xs text-gray-500">
+                                        {{ $course->updated_at->diffForHumans() }}
+                                    </span>
+                                    <a
+                                        href="{{ $course->url_video }}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="inline-flex items-center rounded-full bg-[#00FF00] hover:bg-[#00e600] px-5 py-2 text-sm font-bold text-black transition-all shadow-[0_0_15px_rgba(0,255,0,0.2)]"
+                                    >
+                                        Ver curso
+                                    </a>
+                                </div>
                             </div>
                         </article>
                     @endforeach

@@ -44,6 +44,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
         'apellidos',
         'email',
         'descripcion',
+        'profile_photo_path',
         'password',
         'email_verified_at',
         'is_admin',
@@ -109,4 +110,15 @@ class User extends Authenticatable implements MustVerifyEmailContract
         );
     }
 
+    /**
+     * Resolve the profile photo URL with a default fallback image.
+     */
+    protected function profilePhotoUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes): string => filled($attributes['profile_photo_path'] ?? null)
+                ? asset('storage/'.$attributes['profile_photo_path'])
+                : asset('images/default-avatar.svg'),
+        );
+    }
 }

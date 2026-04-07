@@ -33,13 +33,21 @@
 
                         <article class="glass-panel rounded-xl p-5 border border-white/10 shadow-xl hover:border-[#00FF00]/30 transition-all duration-200">
                             <div class="flex items-start justify-between gap-3">
-                                <div>
-                                    <h2 class="font-headline text-xl font-bold text-white leading-tight">
-                                        {{ $contestant->nombre }} {{ $contestant->apellidos }}
-                                    </h2>
-                                    <p class="mt-1 text-sm text-[#00FF00]">
-                                        {{ $contestant->email }}
-                                    </p>
+                                <div class="flex items-center gap-4">
+                                    <img
+                                        src="{{ $contestant->profile_photo_url }}"
+                                        alt="Foto de {{ $contestant->nombre }} {{ $contestant->apellidos }}"
+                                        class="h-16 w-16 rounded-full object-cover border border-[#00FF00]/30 bg-black/30"
+                                    >
+
+                                    <div>
+                                        <h2 class="font-headline text-xl font-bold text-white leading-tight">
+                                            {{ $contestant->nombre }} {{ $contestant->apellidos }}
+                                        </h2>
+                                        <p class="mt-1 text-sm text-[#00FF00]">
+                                            {{ $contestant->email }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
 
