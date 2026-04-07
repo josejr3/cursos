@@ -3,11 +3,12 @@
 use App\Models\Course;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Admin\RegisterUser;
 
-Route::get('/admin/usuarios', RegisterUser::class)
+use App\Livewire\Admin\AdminPanel;
+
+Route::get('/admin', AdminPanel::class)
     ->middleware(['auth'])
-    ->name('admin.users');
+    ->name('admin.panel');
 
 Route::redirect('/', '/login');
 

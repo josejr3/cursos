@@ -50,9 +50,9 @@ new class extends Component
 
                     @if (auth()->user()->is_admin)
                         <a
-                            href="{{ route('admin.users') }}"
+                            href="{{ route('admin.panel') }}"
                             wire:navigate
-                            class="rounded-full px-4 py-2 text-sm font-semibold transition {{ request()->routeIs('admin.users') ? 'bg-[#00FF00] text-black shadow-[0_0_20px_rgba(0,255,0,0.18)]' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}"
+                            class="rounded-full px-4 py-2 text-sm font-semibold transition {{ request()->routeIs('admin.panel') ? 'bg-[#00FF00] text-black shadow-[0_0_20px_rgba(0,255,0,0.18)]' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}"
                         >
                             Admin
                         </a>
@@ -61,9 +61,7 @@ new class extends Component
             </div>
 
             <div class="hidden sm:flex items-center gap-3">
-                <span class="inline-flex items-center rounded-full border border-[#00FF00]/20 bg-[#00FF00]/10 px-3 py-1 text-xs font-semibold text-[#00FF00]">
-                    En línea
-                </span>
+               
 
                 <x-dropdown align="right" width="56">
                     <x-slot name="trigger">
@@ -149,9 +147,9 @@ new class extends Component
 
                 @if (auth()->user()->is_admin)
                     <a
-                        href="{{ route('admin.users') }}"
+                        href="{{ route('admin.panel') }}"
                         wire:navigate
-                        class="block rounded-xl px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('admin.users') ? 'bg-[#00FF00] text-black' : 'bg-white/5 text-gray-200 hover:bg-white/10' }}"
+                        class="block rounded-xl px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('admin.panel') ? 'bg-[#00FF00] text-black' : 'bg-white/5 text-gray-200 hover:bg-white/10' }}"
                     >
                         Admin
                     </a>
