@@ -51,19 +51,26 @@ class DatabaseSeeder extends Seeder
         );
 
         Course::updateOrCreate(
-            ['titulo' => 'Livewire y Volt desde cero'],
+            ['titulo' => 'Curso Laravel 12 Livewire 3 desde cero'],
             [
                 'descripcion' => 'Construye interfaces reactivas sin salir de PHP usando componentes Livewire y pantallas Volt.',
-                'url_video' => 'https://www.youtube.com/watch?v=U6YfFj2J9Ao',
+                'url_video' => 'https://www.youtube.com/watch?v=Avv1ZnkfkH0',
                 'estado' => 'activo',
             ]
         );
-
         Course::updateOrCreate(
-            ['titulo' => 'Eloquent para aplicaciones escalables'],
+            ['titulo' => 'Curso de Reactjs desde Cero'],
+            [
+                'descripcion' => 'En este curso de React aprenderás las bases necesarias de React como componentes (Components), props, estado (useState), hooks, estilos',
+                'url_video' => 'https://www.youtube.com/watch?v=rLoWMU4L_qE',
+                'estado' => 'activo',
+            ]
+        );
+        Course::updateOrCreate(
+            ['titulo' => 'Eloquent el ORM de Laravel 11'],
             [
                 'descripcion' => 'Domina relaciones, scopes y buenas practicas de consulta para mejorar rendimiento en producción.',
-                'url_video' => 'https://www.youtube.com/watch?v=T7PRf5G2nZ8',
+                'url_video' => 'https://www.youtube.com/watch?v=9-lBWMdEnCA',
                 'estado' => 'activo',
             ]
         );

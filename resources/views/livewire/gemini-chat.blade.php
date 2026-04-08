@@ -33,7 +33,7 @@
             type="button"
             x-show="!open"
             @click="open = true"
-            class="fixed bottom-6 right-6 w-14 h-14 bg-[#00FF00] text-black rounded-full  flex items-center justify-center hover:scale-105 focus:outline-none transition-transform duration-200"
+            class="fixed bottom-6 right-6 w-14 h-14 bg-[#00FF00] text-black rounded-full flex items-center justify-center hover:scale-105 focus:outline-none transition-transform duration-200 shadow-[0_0_15px_rgba(0,255,0,0.3)]"
         >
             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
@@ -42,34 +42,36 @@
 
         <div
             x-show="open"
-            x-bind:class="fullscreen ? 'fixed inset-0 w-full h-full rounded-none' : 'fixed w-[380px] h-[600px] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]'"
+            x-bind:class="fullscreen ? 'fixed inset-0 w-full h-full rounded-none' : 'fixed w-[380px] h-[600px] rounded-2xl shadow-[0_25px_50px_rgba(0,0,0,0.5)]'"
             x-bind:style="!fullscreen ? 'left: ' + x + 'px; top: ' + y + 'px;' : ''"
-            class="bg-[#09090b]/85 backdrop-blur-2xl flex flex-col overflow-hidden transition-all duration-200 ease-out border border-white/10"
+            class="bg-[#09090b]/70 backdrop-blur-xl flex flex-col overflow-hidden transition-all duration-200 ease-out border border-white/10"
         >
             <div
                 @mousedown="startDrag($event)"
-                class="bg-[#000000]/40 border-b border-white/5 px-5 py-4 flex justify-between items-center cursor-move select-none z-10"
+                class="bg-black/40 border-b border-white/5 px-5 py-4 flex justify-between items-center cursor-move select-none z-10"
             >
                 <div class="flex items-center space-x-2">
                     <span class="text-white font-semibold text-[15px] tracking-wide">
-                        TALENT<span class="text-[#00FF00]">CAMP</span>
+                        T<span class="text-[#00FF00]">alentCamp </span>School
                     </span>
                 </div>
 
                 <div class="flex items-center space-x-1">
                     <button type="button" @click="open = false" class="p-1.5 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-all focus:outline-none">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20 12H4"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M18 12H6"></path>
                         </svg>
                     </button>
+                    
                     <button type="button" @click="fullscreen = !fullscreen" class="p-1.5 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-all focus:outline-none">
-                        <svg x-show="!fullscreen" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l-5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                        <svg x-show="!fullscreen" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75v4.5m0-4.5h-4.5m4.5 0L15 9m5.25 11.25v-4.5m0 4.5h-4.5m4.5 0L15 15" />
                         </svg>
-                        <svg x-show="fullscreen" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 14h6m0 0v6m0-6l-7 7m17-11h-6m0 0V4m0 6l7-7M4 10h6m0 0V4m0 6l-7-7m17 10h-6m0 0v6m0-6l7 7"></path>
+                        <svg x-show="fullscreen" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display: none;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 3.75v4.5m0 0h-4.5M9 8.25L3.75 3M9 15.75v4.5m0-4.5h-4.5M9 15.75L3.75 21M15 3.75v4.5m0 0h4.5M15 8.25L20.25 3M15 15.75v4.5m0-4.5h4.5M15 15.75L20.25 21" />
                         </svg>
                     </button>
+
                     <button type="button" @click="open = false; fullscreen = false" class="p-1.5 text-gray-400 hover:text-[#00FF00] hover:bg-[#00FF00]/10 rounded-lg transition-all focus:outline-none">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
@@ -79,7 +81,6 @@
             </div>
 
             <div class="flex-1 overflow-y-auto p-5 space-y-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                
                 <div class="flex flex-col space-y-5" wire:key="messages-container">
                     @foreach($messages as $index => $message)
                         <div wire:key="msg-{{ $index }}" class="flex {{ $message['role'] === 'user' ? 'justify-end' : 'justify-start' }}">
@@ -106,8 +107,8 @@
                 </div>
             </div>
 
-            <div class="bg-[#000000]/20 p-4 border-t border-white/5 z-10 flex-shrink-0">
-                <div class="flex items-center bg-[#09090b]/80 border border-white/10 rounded-full p-1.5 focus-within:border-[#00FF00]/50 focus-within:ring-1 focus-within:ring-[#00FF00]/50 transition-all shadow-inner">
+            <div class="bg-black/20 p-4 border-t border-white/5 z-10 flex-shrink-0">
+                <div class="flex items-center bg-black/40 border border-white/10 rounded-full p-1.5 focus-within:border-[#00FF00]/50 focus-within:ring-1 focus-within:ring-[#00FF00]/50 transition-all shadow-inner">
                     <input
                         type="text"
                         wire:model="newMessage"

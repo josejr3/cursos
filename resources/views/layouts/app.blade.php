@@ -27,11 +27,7 @@
             /* Fondo Premium Global Corregido: Más negro, menos brillo */
             body {
                 background-color: var(--bg-dark) !important;
-                background-image: 
-                    radial-gradient(circle at 15% 15%, rgba(0, 229, 255, 0.07) 0%, transparent 25%),
-                    radial-gradient(circle at 85% 85%, rgba(0, 255, 0, 0.07) 0%, transparent 25%),
-                    linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,1)),
-                    repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 10px);
+                
                 background-blend-mode: screen, screen, normal, normal;
                 background-attachment: fixed;
                 color: var(--text-main);
@@ -67,4 +63,5 @@
             </main>
         </div>
     </body>
+    <livewire:gemini-chat />
 </html>

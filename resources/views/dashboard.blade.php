@@ -86,5 +86,5 @@
         </div>
     </section>
 
-    <livewire:gemini-chat />
+    
 </x-app-layout>

@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Livewire\Admin\AdminPanel;
 
+
+
+
 Route::get('/admin', AdminPanel::class)
     ->middleware(['auth'])
     ->name('admin.panel');
