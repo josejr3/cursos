@@ -11,6 +11,7 @@
 /laravel/Homestead.yaml
 
 # Archivos de la carpeta de almacenamiento (Storage)
+/laravel/public/hot
 /laravel/storage/*.key
 /laravel/storage/framework/cache/data/*
 /laravel/storage/framework/sessions/*
