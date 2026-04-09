@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory(5)->create();
-
+        /*
         User::updateOrCreate(
             ['email' => 'comosa21@gmail.com'],
             [
@@ -29,14 +29,14 @@ class DatabaseSeeder extends Seeder
                 'remember_token' => Str::random(60),
             ]
         );
-
+    */
         User::updateOrCreate(
             ['email' => 'admin@ejemplo.com'],
             [
-                'nombre' => 'Admin',
+                'nombre' => 'gestion@talentcamp.com',
                 'apellidos' => 'Sistema',
                 'email_verified_at' => now(),
-                'password' => Hash::make('test'),
+                'password' => Hash::make('n#jZ{OGxO)7O'),
                 'is_admin' => true,
             ]
         );
