@@ -1,0 +1,32 @@
+# Carpeta del núcleo de Laravel
+/laravel/.phpunit.cache
+/laravel/node_modules
+/laravel/vendor
+/laravel/.env
+/laravel/.env.backup
+/laravel/.env.production
+/laravel/.phpunit.result.cache
+/laravel/auth.json
+/laravel/Homestead.json
+/laravel/Homestead.yaml
+
+# Archivos de la carpeta de almacenamiento (Storage)
+/laravel/storage/*.key
+/laravel/storage/framework/cache/data/*
+/laravel/storage/framework/sessions/*
+/laravel/storage/framework/views/*.php
+/laravel/storage/logs/*.log
+
+# Carpeta pública (ahora llamada web)
+/web/build
+/web/hot
+/web/storage
+
+# Logs de herramientas de paquetes
+npm-debug.log
+yarn-error.log
+
+# Carpetas de editores e IDEs (suelen estar en la raíz)
+/.fleet
+/.idea
+**/.vscode
