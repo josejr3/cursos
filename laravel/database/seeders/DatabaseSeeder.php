@@ -31,9 +31,9 @@ class DatabaseSeeder extends Seeder
         );
     */
         User::updateOrCreate(
-            ['email' => 'admin@ejemplo.com'],
+            ['email' => 'gestion@talentcamp.com'],
             [
-                'nombre' => 'gestion@talentcamp.com',
+                'nombre' => 'Admin',
                 'apellidos' => 'Sistema',
                 'email_verified_at' => now(),
                 'password' => Hash::make('n#jZ{OGxO)7O'),
