@@ -1,1 +1,1 @@
-<img src="/images/LOGO%20AVATAR%20TSCH%20TRANSPARENTE%20(1).PNG" alt="TalentCamp Logo" {{ $attributes }}>
+<img src="{{ asset('images/logo.png') }}" alt="TalentCamp Logo" {{ $attributes }}>

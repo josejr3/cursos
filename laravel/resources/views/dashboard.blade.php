@@ -119,7 +119,7 @@
                 <div class="flex flex-col items-center md:items-start gap-2">
                     <a href="{{ route('dashboard') }}" class="flex items-center gap-3 group">
                         <img
-                            src="/images/LOGO%20AVATAR%20TSCH%20TRANSPARENTE%20(1).PNG"
+                            src="{{ asset('images/logo.png') }}"
                             alt="TalentCamp"
                             class="h-10 w-10 object-contain rounded-lg"
                         >

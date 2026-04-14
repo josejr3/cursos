@@ -22,7 +22,7 @@ new class extends Component
             <div class="flex items-center gap-3 sm:gap-6">
                 <a href="{{ route('dashboard') }}" wire:navigate class="group flex items-center gap-3">
                     <img
-                        src="/images/LOGO%20AVATAR%20TSCH%20TRANSPARENTE%20(1).PNG"
+                        src="{{ asset('images/logo.png') }}"
                         alt="TalentCamp"
                         class="h-10 w-10 rounded-xl object-contain border border-white/10 bg-white/5 transition group-hover:border-[#00FF00]/30"
                     >
