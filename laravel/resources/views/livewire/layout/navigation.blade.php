@@ -21,9 +21,11 @@ new class extends Component
         <div class="flex h-16 items-center justify-between gap-4">
             <div class="flex items-center gap-3 sm:gap-6">
                 <a href="{{ route('dashboard') }}" wire:navigate class="group flex items-center gap-3">
-                    <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 shadow-lg shadow-black/20 transition group-hover:border-[#00FF00]/30 group-hover:bg-[#00FF00]/10">
-                        <x-application-logo class="block h-7 w-auto fill-current text-white" />
-                    </span>
+                    <img
+                        src="{{ asset('images/LOGO AVATAR TSCH TRANSPARENTE (1).PNG') }}"
+                        alt="TalentCamp"
+                        class="h-10 w-10 rounded-xl object-contain border border-white/10 bg-white/5 transition group-hover:border-[#00FF00]/30"
+                    >
 
                     <div class="hidden md:block">
                         <p class="font-headline text-sm font-bold tracking-wide text-white">TalentCamp</p>
