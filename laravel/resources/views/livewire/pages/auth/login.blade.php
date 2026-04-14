@@ -24,7 +24,7 @@ new #[Layout('layouts.guest')] class extends Component
 <div class="min-h-screen flex items-center justify-center relative overflow-hidden bg-black font-['Inter',_sans-serif] text-[#f0f0f5]">
     <div class="relative z-10 w-full max-w-[420px] p-[40px] bg-[#14141c]/45 backdrop-blur-[30px] border border-white/10 rounded-[24px] shadow-[0_30px_60px_rgba(0,0,0,0.6),inset_0_0_20px_rgba(255,255,255,0.02)] flex flex-col items-center mx-4 max-sm:p-[30px_24px]">
         
-        <img src="{{ asset('images/LOGO AVATAR TSCH TRANSPARENTE (1).PNG') }}" alt="TalentCamp" class="h-16 w-16 object-contain mb-2">
+        <img src="/images/LOGO%20AVATAR%20TSCH%20TRANSPARENTE%20(1).PNG" alt="TalentCamp" class="h-16 w-16 object-contain mb-2">
         
         <p class="text-[#8b8b99] text-[14px] mb-[40px] text-center font-medium">
             Bienvenido de nuevo. Inicia sesión para continuar.
