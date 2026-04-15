@@ -61,6 +61,8 @@
             <main class="flex-grow relative z-10">
                 {{ $slot }}
             </main>
+
+            @include('layouts.footer')
         </div>
     </body>
     <livewire:gemini-chat />
