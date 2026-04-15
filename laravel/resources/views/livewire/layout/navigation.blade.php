@@ -50,6 +50,14 @@ new class extends Component
                         Concursantes
                     </a>
 
+                    <a
+                        href="{{ route('shorts.index') }}"
+                        wire:navigate
+                        class="rounded-full px-4 py-2 text-sm font-semibold transition {{ request()->routeIs('shorts.index') ? 'bg-[#00FF00] text-black shadow-[0_0_20px_rgba(0,255,0,0.18)]' : 'text-gray-300 hover:bg-white/10 hover:text-white' }}"
+                    >
+                        Shorts
+                    </a>
+
                     @if (auth()->user()->is_admin)
                         <a
                             href="{{ route('admin.panel') }}"
@@ -145,6 +153,14 @@ new class extends Component
                     class="block rounded-xl px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('contestants.index') ? 'bg-[#00FF00] text-black' : 'bg-white/5 text-gray-200 hover:bg-white/10' }}"
                 >
                     Concursantes
+                </a>
+
+                <a
+                    href="{{ route('shorts.index') }}"
+                    wire:navigate
+                    class="block rounded-xl px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('shorts.index') ? 'bg-[#00FF00] text-black' : 'bg-white/5 text-gray-200 hover:bg-white/10' }}"
+                >
+                    Shorts
                 </a>
 
                 @if (auth()->user()->is_admin)

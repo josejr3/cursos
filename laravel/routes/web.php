@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Course;
+use App\Models\Short;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,16 @@ Route::get('concursantes', function () {
         'contestants' => $contestants,
     ]);
 })->middleware(['auth', 'verified'])->name('contestants.index');
+
+Route::get('shorts', function () {
+    $shorts = Short::query()
+        ->latest()
+        ->get();
+
+    return view('shorts.index', [
+        'shorts' => $shorts,
+    ]);
+})->middleware(['auth', 'verified'])->name('shorts.index');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

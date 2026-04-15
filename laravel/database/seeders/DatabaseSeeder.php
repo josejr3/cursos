@@ -74,5 +74,11 @@ class DatabaseSeeder extends Seeder
                 'estado' => 'activo',
             ]
         );
+
+        $this->call([
+            TestUsersSeeder::class,
+            TestCoursesSeeder::class,
+            TestShortsSeeder::class,
+        ]);
     }
 }

@@ -80,6 +80,13 @@ class AdminPanel extends Component
         ]);
     }
 
+    public function deleteShort(int $shortId)
+    {
+        Short::query()->whereKey($shortId)->delete();
+
+        session()->flash('status', 'Short eliminado exitosamente.');
+    }
+
     public function saveCurso()
     {
         $this->validate([
@@ -108,6 +115,8 @@ class AdminPanel extends Component
 
     public function render()
     {
-        return view('livewire.admin.admin-panel');
+        return view('livewire.admin.admin-panel', [
+            'shorts' => Short::query()->latest()->get(),
+        ]);
     }
 }

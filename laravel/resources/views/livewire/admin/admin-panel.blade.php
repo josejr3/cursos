@@ -150,15 +150,48 @@
                         
                         <div class="md:col-span-2 flex flex-col gap-1.5">
                             <label class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] ml-1">URL</label>
-                            <input wire:model="url_short" type="url" placeholder="https://..." class="w-full bg-white/5 border border-white/10 text-white p-3 rounded-xl focus:border-[#00ff00]/40 focus:ring-0 transition-all outline-none text-sm placeholder:text-gray-700">
+                            <input wire:model="url_short" type="url" placeholder="https://www.youtube.com/shorts/..." class="w-full bg-white/5 border border-white/10 text-white p-3 rounded-xl focus:border-[#00ff00]/40 focus:ring-0 transition-all outline-none text-sm placeholder:text-gray-700">
                             @error('url_short') <span class="text-red-500 text-[10px] uppercase font-bold mt-1 ml-1">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
-                    <div class="mt-auto pt-8 flex justify-end">
+                    <div class="mt-8 flex justify-end">
                         <button type="submit" class="bg-[#00ff00] text-black font-black px-12 py-3 rounded-full uppercase text-xs tracking-widest hover:bg-[#00d900] hover:scale-105 transition-all active:scale-95 shadow-[0_0_20px_rgba(0,255,0,0.3)]">
                             Registrar Short
                         </button>
+                    </div>
+
+                    <div class="mt-8 border-t border-white/10 pt-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-sm font-bold text-white uppercase tracking-[0.12em]">Shorts registrados</h2>
+                            <span class="text-xs text-[#00ff00] font-semibold">{{ $shorts->count() }} total</span>
+                        </div>
+
+                        @if ($shorts->isEmpty())
+                            <p class="text-sm text-gray-400">Todavia no hay shorts registrados.</p>
+                        @else
+                            <div class="space-y-3 max-h-[220px] overflow-y-auto pr-1">
+                                @foreach ($shorts as $short)
+                                    <div class="rounded-xl border border-white/10 bg-white/5 p-3 flex items-center justify-between gap-3">
+                                        <div class="min-w-0">
+                                            <p class="text-sm text-white font-semibold truncate">{{ $short->titulo }}</p>
+                                            <a href="{{ $short->url }}" target="_blank" rel="noopener noreferrer" class="text-xs text-gray-400 hover:text-[#00ff00] truncate block">
+                                                {{ $short->url }}
+                                            </a>
+                                        </div>
+
+                                        <button
+                                            type="button"
+                                            wire:click="deleteShort({{ $short->id }})"
+                                            wire:confirm="Deseas eliminar este short?"
+                                            class="shrink-0 rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-red-300 hover:bg-red-500/20 transition"
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                 </form>
             @endif

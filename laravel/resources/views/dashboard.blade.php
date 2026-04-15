@@ -21,6 +21,13 @@
                             Ver concursantes
                         </a>
 
+                        <a
+                            href="{{ route('shorts.index') }}"
+                            class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-white hover:border-[#00FF00]/40 hover:text-[#00FF00] transition-all"
+                        >
+                            Ver shorts
+                        </a>
+
                         <span class="inline-flex items-center rounded-full bg-[#00FF00]/10 text-[#00FF00] border border-[#00FF00]/20 px-4 py-2 text-sm font-semibold">
                             {{ $courses->count() }} disponibles
                         </span>
@@ -143,6 +150,12 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/>
                         </svg>
                         Concursantes
+                    </a>
+                    <a href="{{ route('shorts.index') }}" class="text-gray-400 hover:text-[#00FF00] transition-colors duration-200 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.723v6.554a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/>
+                        </svg>
+                        Shorts
                     </a>
                     <a href="{{ route('profile') }}" class="text-gray-400 hover:text-[#00FF00] transition-colors duration-200 flex items-center gap-1.5">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
