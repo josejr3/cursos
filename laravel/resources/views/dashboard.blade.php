@@ -13,24 +13,38 @@
                         </p>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                        <a
-                            href="{{ route('contestants.index') }}"
-                            class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-white hover:border-[#00FF00]/40 hover:text-[#00FF00] transition-all"
-                        >
-                            Ver concursantes
-                        </a>
+                    <div class="w-full md:w-auto flex flex-col items-stretch gap-3">
+                        <div class="rounded-2xl border border-[#00FF00]/25 bg-gradient-to-br from-[#00FF00]/14 via-[#00FF00]/5 to-transparent px-4 py-3 shadow-[0_0_28px_rgba(0,255,0,0.08)]">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                                <div>
+                                    <p class="text-[11px] uppercase tracking-[0.2em] text-[#00FF00]/80 font-semibold">Zona de concursantes</p>
+                                    <p class="text-sm text-gray-200 mt-1">Explora perfiles, avances y shorts en un solo lugar.</p>
+                                </div>
 
-                        <a
-                            href="{{ route('shorts.index') }}"
-                            class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-white hover:border-[#00FF00]/40 hover:text-[#00FF00] transition-all"
-                        >
-                            Ver shorts
-                        </a>
+                                <a
+                                    href="{{ route('contestants.index') }}"
+                                    class="inline-flex items-center justify-center gap-2 rounded-full bg-[#00FF00] hover:bg-[#00e600] px-5 py-2.5 text-sm font-bold text-black transition-all shadow-[0_0_15px_rgba(0,255,0,0.25)] hover:shadow-[0_0_24px_rgba(0,255,0,0.45)]"
+                                >
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5V4H2v16h5m10 0v-8a2 2 0 00-2-2H9a2 2 0 00-2 2v8m10 0H7"/>
+                                    </svg>
+                                    Entrar a concursantes
+                                </a>
+                            </div>
 
-                        <span class="inline-flex items-center rounded-full bg-[#00FF00]/10 text-[#00FF00] border border-[#00FF00]/20 px-4 py-2 text-sm font-semibold">
-                            {{ $courses->count() }} disponibles
-                        </span>
+                            <div class="mt-3 flex flex-wrap items-center gap-2">
+                                <a
+                                    href="{{ route('shorts.index') }}"
+                                    class="inline-flex items-center rounded-full border border-white/15 bg-black/25 px-4 py-2 text-xs font-semibold text-white hover:border-[#00FF00]/40 hover:text-[#00FF00] transition-all"
+                                >
+                                    Ver shorts
+                                </a>
+
+                                <span class="inline-flex items-center rounded-full bg-[#00FF00]/10 text-[#00FF00] border border-[#00FF00]/20 px-4 py-2 text-xs font-semibold">
+                                    {{ $courses->count() }} cursos activos
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
