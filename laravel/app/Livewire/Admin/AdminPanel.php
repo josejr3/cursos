@@ -6,8 +6,8 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Models\User;
 use App\Models\Course;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Short;
+use Illuminate\Support\Facades\Hash;
 
 #[Layout('layouts.app')]
 class AdminPanel extends Component
@@ -26,13 +26,77 @@ class AdminPanel extends Component
 
     public $titulo_short;
     public $url_short;
+public $status; // Variable persistente para errores de Excel
 
-    public function setTab($tabName)
-    {
-        $this->tab = $tabName;
-        $this->resetValidation();
+public $statusMsg;
+public function setTab($tabName)
+{
+    $this->tab = $tabName;
+}
+
+public function cargarUsuariosJson($datos)
+{
+    $this->statusMsg = null; // Limpiamos al empezar nuevo intento
+
+    if (empty($datos)) {
+        $this->statusMsg = 'Error: El archivo está vacío.';
+        return;
     }
 
+    $limpiar = function($texto) {
+        $texto = mb_strtolower(trim($texto), 'UTF-8');
+        $acentos = ['á'=>'a','é'=>'e','í'=>'i','ó'=>'o','ú'=>'u','ñ'=>'n'];
+        $texto = strtr($texto, $acentos);
+        return preg_replace('/[^a-z0-9]/', '', $texto);
+    };
+
+    $encabezadosOriginales = array_keys($datos[0]);
+    $mapaColumnas = [];
+    foreach ($encabezadosOriginales as $columna) {
+        $mapaColumnas[$limpiar($columna)] = $columna;
+    }
+
+    $llaveNombre = $mapaColumnas['nombre'] ?? null;
+    $llaveApellidos = $mapaColumnas['apellidos'] ?? null;
+    $llaveEmail = $mapaColumnas['correoelectronico'] ?? $mapaColumnas['email'] ?? null;
+    $llaveDesc = $mapaColumnas['descripcion'] ?? null;
+
+    if (!$llaveNombre) { $this->statusMsg = 'Error: Falta la columna Nombre.'; return; }
+    if (!$llaveApellidos) { $this->statusMsg = 'Error: Falta la columna Apellidos.'; return; }
+    if (!$llaveEmail) { $this->statusMsg = 'Error: Falta la columna Correo Electrónico.'; return; }
+    if (!$llaveDesc) { $this->statusMsg = 'Error: Falta la columna Descripción.'; return; }
+
+    $contadorRegistrados = 0;
+    foreach ($datos as $fila) {
+        $nombre = trim($fila[$llaveNombre] ?? '');
+        $apellidos = trim($fila[$llaveApellidos] ?? '');
+        $email = trim($fila[$llaveEmail] ?? '');
+        $descripcion = trim($fila[$llaveDesc] ?? '');
+
+        if (empty($nombre) || empty($apellidos) || empty($email) || empty($descripcion)) {
+            continue; 
+        }
+
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            if (!\App\Models\User::where('email', $email)->exists()) {
+                \App\Models\User::create([
+                    'name' => $nombre,
+                    'last_name' => $apellidos,
+                    'email' => $email,
+                    'password' => \Illuminate\Support\Facades\Hash::make('password'),
+                    'description' => $descripcion,
+                ]);
+                $contadorRegistrados++;
+            }
+        }
+    }
+
+    if ($contadorRegistrados === 0) {
+        $this->statusMsg = 'Error: No se pudo registrar a nadie. Verifique celdas vacías.';
+    } else {
+        $this->statusMsg = "Importación exitosa: Se registraron $contadorRegistrados usuarios.";
+    }
+}
     public function saveUsuario()
     {
         $this->validate([
@@ -52,12 +116,7 @@ class AdminPanel extends Component
 
         session()->flash('status', 'Usuario registrado exitosamente.');
         
-        $this->reset([
-            'nombre', 
-            'apellidos', 
-            'email', 
-            'descripcion_usuario'
-        ]);
+        $this->reset(['nombre', 'apellidos', 'email', 'descripcion_usuario']);
     }
 
     public function saveShort()
@@ -74,16 +133,12 @@ class AdminPanel extends Component
 
         session()->flash('status', 'Short registrado exitosamente.');
         
-        $this->reset([
-            'titulo_short', 
-            'url_short'
-        ]);
+        $this->reset(['titulo_short', 'url_short']);
     }
 
     public function deleteShort(int $shortId)
     {
         Short::query()->whereKey($shortId)->delete();
-
         session()->flash('status', 'Short eliminado exitosamente.');
     }
 
@@ -100,17 +155,12 @@ class AdminPanel extends Component
             'titulo' => $this->titulo,
             'url_video' => $this->url_video,
             'estado' => $this->estado,
-            'descripcion' => $this->descripcion_curso,
+            'description' => $this->descripcion_curso,
         ]);
 
         session()->flash('status', 'Curso registrado exitosamente.');
         
-        $this->reset([
-            'titulo', 
-            'url_video', 
-            'estado', 
-            'descripcion_curso'
-        ]);
+        $this->reset(['tcitulo', 'url_video', 'estado', 'descripcion_curso']);
     }
 
     public function render()
