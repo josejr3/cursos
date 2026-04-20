@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Providers;
 
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\ServiceProvider;
 
@@ -37,6 +37,16 @@ class AppServiceProvider extends ServiceProvider
                     'user' => $notifiable,
                 ]);
         });
+
+        VerifyEmail::toMailUsing(function ($notifiable, $url) {
+            return (new MailMessage)
+                ->subject('Verifica tu correo electrónico')
+                ->view('emails.verify-email', [
+                    'url' => $url,
+                    'user' => $notifiable,
+                ]);
+        });
+
     }
 }
 			
