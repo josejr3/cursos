@@ -84,7 +84,7 @@ public function cargarUsuariosJson($datos)
                     'last_name' => $apellidos,
                     'email' => $email,
                     'password' => \Illuminate\Support\Facades\Hash::make('password'),
-                    'description' => $descripcion,
+                    'descripcion' => $descripcion,
                 ]);
                 $contadorRegistrados++;
             }
@@ -111,7 +111,7 @@ public function cargarUsuariosJson($datos)
             'last_name' => $this->apellidos,
             'email' => $this->email,
             'password' => Hash::make('password'),
-            'description' => $this->descripcion_usuario,
+            'descripcion' => $this->descripcion_usuario,
         ]);
 
         session()->flash('status', 'Usuario registrado exitosamente.');

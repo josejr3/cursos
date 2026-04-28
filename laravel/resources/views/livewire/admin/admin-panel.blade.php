@@ -1,16 +1,25 @@
 <div class="flex items-center justify-center min-h-screen bg-black font-sans tracking-tight p-4">
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
-    <div class="glass-panel flex flex-col md:flex-row w-full max-w-[900px] min-h-[520px] rounded-xl border border-white/10 shadow-2xl overflow-hidden bg-[#0a0a0a]">
+    <div class="glass-panel flex flex-col md:flex-row w-full max-w-[900px] h-[calc(100vh-2rem)] rounded-xl border border-white/10 shadow-2xl overflow-hidden bg-[#0a0a0a]">
+        
+        <!-- Tabs móviles -->
+        <div class="md:hidden flex gap-1 p-4 border-b border-white/5 bg-[#0a0a0a] overflow-x-auto">
+            <button onclick="setTimeout(() => window.location.reload(), 0)" class="inline-flex items-center justify-center px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all {{ $tab === 'usuario' ? 'bg-[#00ff00] text-black' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
+            Usuario
+            </button>
+            <button wire:click="setTab('curso')" class="px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all {{ $tab === 'curso' ? 'bg-[#00ff00] text-black' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">Curso</button>
+            <button wire:click="setTab('short')" class="px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all {{ $tab === 'short' ? 'bg-[#00ff00] text-black' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">Short</button>
+        </div>
         
         <aside class="hidden md:flex w-[180px] bg-[#0a0a0a] p-8 flex-col gap-2 border-r border-white/5">
             <span class="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em] mb-4 px-2">Registros</span>
-            <button wire:click="setTab('usuario')" class="w-full text-left py-2 px-5 rounded-full text-sm font-bold transition-all block {{ $tab === 'usuario' ? 'bg-[#00ff00] text-black shadow-[0_0_20px_rgba(0,255,0,0.15)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">Usuario</button>
+            <button wire:click="setTab('usuario')" onclick="setTimeout(() => window.location.reload(),0)" class="w-full text-left py-2 px-5 rounded-full text-sm font-bold transition-all block {{ $tab === 'usuario' ? 'bg-[#00ff00] text-black shadow-[0_0_20px_rgba(0,255,0,0.15)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">Usuario</button>
             <button wire:click="setTab('curso')" class="w-full text-left py-2 px-5 rounded-full text-sm font-bold transition-all block {{ $tab === 'curso' ? 'bg-[#00ff00] text-black shadow-[0_0_20px_rgba(0,255,0,0.15)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">Curso</button>
             <button wire:click="setTab('short')" class="w-full text-left py-2 px-5 rounded-full text-sm font-bold transition-all block {{ $tab === 'short' ? 'bg-[#00ff00] text-black shadow-[0_0_20px_rgba(0,255,0,0.15)]' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">Short</button>
         </aside>
 
-        <main class="flex-grow p-10 flex flex-col w-full max-w-[720px]">
+        <main class="flex-grow p-6 md:p-10 flex flex-col w-full overflow-y-auto">
             
             @if ($statusMsg)
                 <div class="mb-6 p-4 rounded-xl text-xs font-bold uppercase tracking-widest border {{ str_contains($statusMsg, 'Error') ? 'bg-red-500/10 border-red-500/20 text-red-500' : 'bg-[#00ff00]/10 border-[#00ff00]/20 text-[#00ff00]' }}">
@@ -228,35 +237,7 @@
                         <button type="submit" class="bg-[#00ff00] text-black font-black px-12 py-3 rounded-full uppercase text-xs tracking-widest hover:bg-[#00d900] hover:scale-105 transition-all active:scale-95 shadow-[0_0_20px_rgba(0,255,0,0.3)]">
                             Registrar Short
                         </button>
-                    </div>
-
-                    <div class="mt-8 border-t border-white/10 pt-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-sm font-bold text-white uppercase tracking-[0.12em]">Shorts registrados</h2>
-                            <span class="text-xs text-[#00ff00] font-semibold">{{ $shorts->count() }} total</span>
-                        </div>
-
-                        @if ($shorts->isEmpty())
-                            <p class="text-sm text-gray-400">Todavia no hay shorts registrados.</p>
-                        @else
-                            <div class="space-y-3 max-h-[220px] overflow-y-auto pr-1">
-                                @foreach ($shorts as $short)
-                                    <div class="rounded-xl border border-white/10 bg-white/5 p-3 flex items-center justify-between gap-3">
-                                        <div class="min-w-0">
-                                            <p class="text-sm text-white font-semibold truncate">{{ $short->titulo }}</p>
-                                            <a href="{{ $short->url }}" target="_blank" rel="noopener noreferrer" class="text-xs text-gray-400 hover:text-[#00ff00] truncate block">
-                                                {{ $short->url }}
-                                            </a>
-                                        </div>
-
-                                        <button type="button" wire:click="deleteShort({{ $short->id }})" wire:confirm="Deseas eliminar este short?" class="shrink-0 rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-red-300 hover:bg-red-500/20 transition">
-                                            Eliminar
-                                        </button>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
-                    </div>
+                    
                 </form>
             @endif
         </main>
