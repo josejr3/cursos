@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between gap-4">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight flex items-center gap-2">
+                <img src="/images/CURSO.png" alt="Cursos" class="h-8 w-8 object-contain">
                 Cursos
             </h2>
             <span class="text-sm text-gray-500">

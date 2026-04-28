@@ -5,12 +5,17 @@
             <div class="glass-panel rounded-xl p-6 md:p-8 border border-white/10 shadow-2xl">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div>
-                        <h1 class="font-headline text-3xl md:text-4xl font-extrabold tracking-tight text-white">
-                            Cursos <span class="text-[#00FF00]">TalentCamp</span>
-                        </h1>
-                        <p class="text-gray-400 mt-2 max-w-2xl">
-                            Empieza por una clase y construye progreso constante.
-                        </p>
+                        <div class="flex items-center gap-4">
+                            <img src="/images/CURSO.png" alt="Cursos" class="h-16 w-16 object-contain shrink-0 drop-shadow-lg">
+                            <div>
+                                <h1 class="font-headline text-3xl md:text-4xl font-extrabold tracking-tight text-white">
+                                    Cursos <span class="text-[#00FF00]">TalentCamp</span>
+                                </h1>
+                                <p class="text-gray-400 mt-2 max-w-2xl">
+                                    Empieza por una clase y construye progreso constante.
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="w-full md:w-auto flex flex-col items-stretch gap-3">

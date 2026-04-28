@@ -4,7 +4,8 @@
             <div class="glass-panel rounded-2xl p-6 md:p-8 border border-white/10 shadow-2xl">
                 <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
                     <div>
-                        <h1 class="font-headline text-3xl md:text-4xl font-extrabold tracking-tight text-white">
+                        <h1 class="font-headline text-3xl md:text-4xl font-extrabold tracking-tight text-white flex items-center gap-3">
+                            <img src="/images/PARTICIPANTES.png" alt="Participantes" class="h-10 w-10 object-contain shrink-0">
                             Perfiles de <span class="text-[#00FF00]">concursantes</span>
                         </h1>
                         <p class="text-gray-400 mt-2 max-w-2xl">
@@ -95,14 +96,16 @@
                                 {{ $contestant->descripcion ?: 'Este concursante todavía no ha añadido una descripción.' }}
                             </p>
 
-                            <div class="mt-5">
+                            <div class="mt-5 flex justify-end">
                                 <a
                                     href="{{ $gmailUrl }}"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="inline-flex w-full items-center justify-center rounded-full bg-[#00FF00] hover:bg-[#00e600] px-5 py-2 text-sm font-bold text-black transition-all shadow-[0_0_15px_rgba(0,255,0,0.2)] hover:shadow-[0_0_24px_rgba(0,255,0,0.35)]"
+                                    class="inline-flex h-12 w-12 items-center justify-center transition-transform duration-200 hover:scale-110"
+                                    aria-label="Abrir Gmail"
+                                    title="Abrir Gmail"
                                 >
-                                    Abrir Gmail
+                                    <img src="/images/mensaje.png" alt="Abrir Gmail" class="h-10 w-10 object-contain">
                                 </a>
                             </div>
                         </article>
