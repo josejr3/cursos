@@ -44,6 +44,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
         'apellidos',
         'email',
         'descripcion',
+        'convocatoria',
         'profile_photo_path',
         'password',
         'email_verified_at',
@@ -69,7 +70,8 @@ class User extends Authenticatable implements MustVerifyEmailContract
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password'          => 'hashed',
+            'convocatoria'      => 'array',
         ];
     }
 

@@ -73,7 +73,7 @@ new class extends Component
         </div>
 
         <div class="flex flex-wrap items-center gap-4">
-            <x-primary-button class="rounded-full border-0 bg-[#00FF00] px-5 py-2 text-sm font-bold normal-case tracking-normal text-black hover:bg-[#00e600] focus:bg-[#00e600] active:bg-[#00cc00] focus:ring-[#00FF00]">
+            <x-primary-button class="rounded-full !border-0 !bg-[#00FF00] px-5 py-2 text-sm font-bold normal-case tracking-normal !text-black hover:!bg-[#00e600] focus:!bg-[#00e600] active:!bg-[#00cc00] !focus:ring-[#00FF00]">
                 Actualizar contraseña
             </x-primary-button>
 

@@ -45,8 +45,17 @@ Route::get('concursantes', function () {
         ->orderBy('apellidos')
         ->get();
 
+    $years = $contestants
+        ->pluck('convocatoria')
+        ->filter()
+        ->flatten()
+        ->unique()
+        ->sortDesc()
+        ->values();
+
     return view('contestants.index', [
         'contestants' => $contestants,
+        'years'       => $years,
     ]);
 })->middleware(['auth', 'verified'])->name('contestants.index');
 

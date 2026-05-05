@@ -128,6 +128,16 @@
                                     <textarea wire:model="descripcion_usuario" placeholder="Breve biografía o notas..." class="w-full bg-white/5 border border-white/10 text-white p-3 rounded-xl h-24 resize-none focus:border-[#00ff00]/40 focus:ring-0 transition-all outline-none text-sm placeholder:text-gray-700"></textarea>
                                     @error('descripcion_usuario') <span class="text-red-500 text-[10px] uppercase font-bold mt-1 ml-1">{{ $message }}</span> @enderror
                                 </div>
+
+                                <div class="flex flex-col gap-1.5">
+                                    <div class="flex justify-between items-center ml-1">
+                                        <label class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">Convocatorias (años)</label>
+                                        <span class="text-[9px] text-gray-700 font-bold uppercase">(Opcional)</span>
+                                    </div>
+                                    <input wire:model="convocatoria_usuario" type="text" placeholder="Ej. 2024, 2025" class="w-full bg-white/5 border border-white/10 text-white p-3 rounded-xl focus:border-[#00ff00]/40 focus:ring-0 transition-all outline-none text-sm placeholder:text-gray-700">
+                                    <p class="text-[9px] text-gray-600 mt-1 ml-1">Separa varios años con comas: 2024, 2025</p>
+                                    @error('convocatoria_usuario') <span class="text-red-500 text-[10px] uppercase font-bold mt-1 ml-1">{{ $message }}</span> @enderror
+                                </div>
                             </div>
 
                             <div class="mt-auto pt-8 flex justify-end">

@@ -41,7 +41,7 @@ new class extends Component
     <x-danger-button
         x-data=""
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-        class="rounded-full px-5 py-2 text-sm font-bold normal-case tracking-normal"
+        class="rounded-full border-0 bg-[#EF4444] px-5 py-2 text-sm font-bold normal-case tracking-normal text-white hover:bg-[#DC2626] focus:bg-[#DC2626] active:bg-[#B91C1C] focus:ring-[#EF4444]"
     >Eliminar cuenta</x-danger-button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->isNotEmpty()" focusable>
@@ -70,11 +70,11 @@ new class extends Component
             </div>
 
             <div class="mt-6 flex justify-end gap-3">
-                <x-secondary-button x-on:click="$dispatch('close')" class="border-white/10 bg-white/5 text-white hover:bg-white/10">
+                <x-secondary-button x-on:click="$dispatch('close')" class="border-slate-400/20 bg-slate-500/10 text-slate-200 hover:bg-slate-500/20 focus:ring-slate-300">
                     Cancelar
                 </x-secondary-button>
 
-                <x-danger-button class="rounded-full px-5 py-2 text-sm font-bold normal-case tracking-normal">
+                <x-danger-button class="rounded-full border-0 bg-[#EF4444] px-5 py-2 text-sm font-bold normal-case tracking-normal text-white hover:bg-[#DC2626] focus:bg-[#DC2626] active:bg-[#B91C1C] focus:ring-[#EF4444]">
                     Sí, eliminar cuenta
                 </x-danger-button>
             </div>

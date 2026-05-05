@@ -18,6 +18,7 @@ class AdminPanel extends Component
     public $apellidos;
     public $email;
     public $descripcion_usuario;
+    public $convocatoria_usuario;
 
     public $titulo;
     public $url_video;
@@ -60,6 +61,7 @@ public function cargarUsuariosJson($datos)
     $llaveApellidos = $mapaColumnas['apellidos'] ?? null;
     $llaveEmail = $mapaColumnas['correoelectronico'] ?? $mapaColumnas['email'] ?? null;
     $llaveDesc = $mapaColumnas['descripcion'] ?? null;
+$llaveConvocatoria = $mapaColumnas['convocatoria'] ?? $mapaColumnas['convocatorias'] ?? $mapaColumnas['anos'] ?? $mapaColumnas['ano'] ?? $mapaColumnas['year'] ?? null;
 
     if (!$llaveNombre) { $this->statusMsg = 'Error: Falta la columna Nombre.'; return; }
     if (!$llaveApellidos) { $this->statusMsg = 'Error: Falta la columna Apellidos.'; return; }
@@ -68,10 +70,14 @@ public function cargarUsuariosJson($datos)
 
     $contadorRegistrados = 0;
     foreach ($datos as $fila) {
-        $nombre = trim($fila[$llaveNombre] ?? '');
-        $apellidos = trim($fila[$llaveApellidos] ?? '');
-        $email = trim($fila[$llaveEmail] ?? '');
+        $nombre      = trim($fila[$llaveNombre] ?? '');
+        $apellidos   = trim($fila[$llaveApellidos] ?? '');
+        $email       = trim($fila[$llaveEmail] ?? '');
         $descripcion = trim($fila[$llaveDesc] ?? '');
+        $rawConv = $llaveConvocatoria ? trim($fila[$llaveConvocatoria] ?? '') : '';
+        $convocatoria = $rawConv !== ''
+            ? array_values(array_filter(array_map('intval', preg_split('/[\s,;]+/', $rawConv))))
+            : null;
 
         if (empty($nombre) || empty($apellidos) || empty($email) || empty($descripcion)) {
             continue; 
@@ -80,11 +86,12 @@ public function cargarUsuariosJson($datos)
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             if (!\App\Models\User::where('email', $email)->exists()) {
                 \App\Models\User::create([
-                    'name' => $nombre,
-                    'last_name' => $apellidos,
-                    'email' => $email,
-                    'password' => \Illuminate\Support\Facades\Hash::make('password'),
-                    'descripcion' => $descripcion,
+                    'name'         => $nombre,
+                    'last_name'    => $apellidos,
+                    'email'        => $email,
+                    'password'     => \Illuminate\Support\Facades\Hash::make('password'),
+                    'descripcion'  => $descripcion,
+                    'convocatoria' => $convocatoria,
                 ]);
                 $contadorRegistrados++;
             }
@@ -100,23 +107,27 @@ public function cargarUsuariosJson($datos)
     public function saveUsuario()
     {
         $this->validate([
-            'nombre' => 'required|string|max:255',
-            'apellidos' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'descripcion_usuario' => 'nullable|string',
+            'nombre'               => 'required|string|max:255',
+            'apellidos'            => 'required|string|max:255',
+            'email'                => 'required|email|unique:users,email',
+            'descripcion_usuario'  => 'nullable|string',
+            'convocatoria_usuario' => 'nullable|string|max:255',
         ]);
 
         User::create([
-            'name' => $this->nombre,
-            'last_name' => $this->apellidos,
-            'email' => $this->email,
-            'password' => Hash::make('password'),
-            'descripcion' => $this->descripcion_usuario,
+            'name'         => $this->nombre,
+            'last_name'    => $this->apellidos,
+            'email'        => $this->email,
+            'password'     => Hash::make('password'),
+            'descripcion'  => $this->descripcion_usuario,
+            'convocatoria' => $this->convocatoria_usuario
+                ? array_values(array_filter(array_map('intval', preg_split('/[\s,;]+/', $this->convocatoria_usuario))))
+                : null,
         ]);
 
         session()->flash('status', 'Usuario registrado exitosamente.');
-        
-        $this->reset(['nombre', 'apellidos', 'email', 'descripcion_usuario']);
+
+        $this->reset(['nombre', 'apellidos', 'email', 'descripcion_usuario', 'convocatoria_usuario']);
     }
 
     public function saveShort()

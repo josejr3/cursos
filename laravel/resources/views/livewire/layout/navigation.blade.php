@@ -95,8 +95,8 @@ new class extends Component
 
                     <x-slot name="content">
                         <div class="px-4 py-3 border-b border-white/10">
-                            <p class="text-sm font-semibold text-gray-800">{{ auth()->user()->nombre }}</p>
-                            <p class="text-xs text-gray-500">{{ auth()->user()->email }}</p>
+                            <p class="text-sm font-semibold text-white">{{ auth()->user()->nombre }}</p>
+                            <p class="text-xs text-gray-400 truncate">{{ auth()->user()->email }}</p>
                         </div>
 
                         <x-dropdown-link :href="route('profile')" wire:navigate>
