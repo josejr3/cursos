@@ -9,10 +9,11 @@
         body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #0e0e11; padding: 20px; }
         table { border-collapse: collapse; }
         td { padding: 0; }
+        .table-main { border-radius: 12px; overflow: hidden; box-shadow: 0 20px 25px rgba(0, 0, 0, 0.3); }
     </style>
 </head>
 <body>
-    <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto;">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto;" class="table-main">
         <!-- Header -->
         <tr>
             <td style="background: linear-gradient(145deg, #171720 0%, #0e0e11 100%); padding: 40px 20px; text-align: center; border-bottom: 1px solid rgba(0,255,0,0.20);">
