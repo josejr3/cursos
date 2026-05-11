@@ -105,61 +105,6 @@
                             --plyr-control-spacing: 10px;
                         }
                     </style>
-
-                    <article x-data="youtubePlayer()"
-                        class="group glass-panel overflow-hidden rounded-2xl border border-white/10 shadow-2xl hover:border-[#00FF00]/40 hover:shadow-[0_0_30px_rgba(0,255,0,0.08)] transition-all duration-300">
-                        <div class="relative overflow-hidden w-full aspect-video bg-black">
-                            <div x-ref="player" data-plyr-provider="youtube" data-plyr-embed-id="Wm8KWFtvyvc"></div>
-                        </div>
-
-                        <div class="p-5 flex flex-col gap-3">
-                            <h2
-                                class="font-headline text-lg font-bold text-white leading-snug group-hover:text-[#00FF00] transition-colors duration-200">
-                                TALENT SCHOOL LA PALMA
-                            </h2>
-
-                            <p class="text-gray-400 text-sm leading-relaxed line-clamp-2">
-                                Descubre TALENT SCHOOL LA PALMA: "Donde tus ideas se hacen realidad"
-                            </p>
-
-                            <div class="mt-auto pt-3 border-t border-white/5 flex items-center justify-end gap-3">
-                                <span class="text-xs text-[#00FF00] font-bold">Video Interactivo</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-
-                    <script>
-                        document.addEventListener('alpine:init', () => {
-                            Alpine.data('youtubePlayer', () => ({
-                                playerInstance: null,
-
-                                init() {
-                                    this.playerInstance = new Plyr(this.$refs.player, {
-                                        controls: [
-                                            'play-large',
-                                            'play',
-                                            'progress',
-                                            'current-time',
-                                            'duration',
-                                            'mute',
-                                            'volume',
-                                            'fullscreen'
-                                        ],
-                                        youtube: {
-                                            noCookie: true,
-                                            rel: 0,
-                                            showinfo: 0,
-                                            iv_load_policy: 3,
-                                            modestbranding: 1,
-                                            disablekb: 1
-                                        }
-                                    });
-                                }
-                            }));
-                        });
-                    </script>
                     @foreach ($courses as $course)
                         <article
                             class="group glass-panel overflow-hidden rounded-2xl border border-white/10 shadow-2xl hover:border-[#00FF00]/40 hover:shadow-[0_0_30px_rgba(0,255,0,0.08)] transition-all duration-300">
@@ -210,13 +155,16 @@
                                         </svg>
                                         {{ $course->updated_at->diffForHumans() }}
                                     </span>
-                                    <a href="{{ $course->url_video }}" target="_blank" rel="noopener noreferrer"
-                                        class="inline-flex items-center gap-2 rounded-full bg-[#00FF00] hover:bg-[#00e600] px-5 py-2 text-sm font-bold text-black transition-all shadow-[0_0_15px_rgba(0,255,0,0.25)] hover:shadow-[0_0_25px_rgba(0,255,0,0.45)]">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M8 5v14l11-7z" />
-                                        </svg>
-                                        Ver curso
-                                    </a>
+                                    <div class="flex items-center gap-2">
+                                        <a href="{{ $course->url_video }}" target="_blank" rel="noopener noreferrer"
+                                            class="inline-flex items-center gap-2 rounded-full bg-[#00FF00] hover:bg-[#00e600] px-5 py-2 text-sm font-bold text-black transition-all shadow-[0_0_15px_rgba(0,255,0,0.25)] hover:shadow-[0_0_25px_rgba(0,255,0,0.45)]">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                            Ver curso
+                                        </a>
+                                        <livewire:delete-course :course="$course" />
+                                    </div>
                                 </div>
                             </div>
                         </article>

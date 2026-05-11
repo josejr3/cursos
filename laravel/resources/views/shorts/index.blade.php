@@ -53,7 +53,7 @@
                                 {{ $short->titulo }}
                             </h2>
 
-                            <div class="mt-5 flex items-center justify-end">
+                            <div class="mt-5 flex items-center justify-between gap-3">
                                 <a
                                     href="{{ $short->url }}"
                                     target="_blank"
@@ -62,6 +62,7 @@
                                 >
                                     Ver en YouTube
                                 </a>
+                                <livewire:delete-short :short="$short" />
                             </div>
                         </article>
                     @endforeach
