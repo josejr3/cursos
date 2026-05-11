@@ -15,6 +15,14 @@ return [
     */
     'gemini' => [
         'api_key' => env('GEMINI_API_KEY'),
+        'models' => [
+            'gemma-3-27b',
+            'gemma-3-12b',
+            'gemini-3.1-flash-lite',
+            'gemini-2.5-flash',
+            'gemini-3-flash',
+            'gemini-2.5-flash-lite',
+        ],
     ],
 
     'postmark' => [
